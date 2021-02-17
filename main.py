@@ -5,6 +5,8 @@ from kivy.graphics import *
 from kivy.clock import Clock
 from kivy.uix.label import Label
 import random
+import pygame
+pygame.init()
 
 class Game(Widget):
 	def __init__(self, **kwargs):
@@ -22,6 +24,7 @@ class Game(Widget):
 
 		self.jump_count = 10
 		self.neg = 1
+		self.jump_sound = pygame.mixer.music.load("jump_sound.mp3")
 		
 		self.game_over_bool = False
 		self.game_start = False
@@ -206,6 +209,7 @@ Score: {self.score}"""
 
 		else:
 			self.jumping = True
+			pygame.mixer.music.play()
 			if self.game_start == False:
 				self.score = 0
 				self.game_start = True
