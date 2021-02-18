@@ -211,7 +211,6 @@ Score: {self.score}"""
 			self.jumping = True
 			pygame.mixer.music.play()
 			if self.game_start == False:
-				self.score = 0
 				self.game_start = True
 			self.ground = self.y
 		
@@ -223,6 +222,7 @@ Score: {self.score}"""
 				self.pill_x = 700
 				self.drop = 7
 				self.jump_count = 10
+                                self.score = 0
 				self.difficulty.text ="Easy"
 				self.difficulty.color = self.easy_bg
 				self.speed = 3
