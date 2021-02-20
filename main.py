@@ -40,11 +40,6 @@ class Game(Widget):
 		with self.canvas:
 			Color(rgb=self.bg_color)
 			Rectangle(size=(800, 1400), pos=(0, 0))
-		
-		#ball
-		with self.canvas:
-			Color(rgb=self.ball_color)
-			self.ball = Ellipse(size=(100, 100), pos=(self.x, self.y))
 			
 		#pillars
 		self.pill_width = 200
@@ -66,6 +61,11 @@ class Game(Widget):
 		with self.canvas:
 			Color(rgb=self.pill_color)
 			self.pill_down = Rectangle(size=(self.pill_width, self.pill_down_height), pos=(self.pill_x, 0))
+			
+		#ball
+		with self.canvas:
+			Color(rgb=self.ball_color)
+			self.ball = Ellipse(size=(100, 100), pos=(self.x, self.y))
 			
 		#difficulty button
 		self.easy_bg = (0, 1, 0, 1)
@@ -220,9 +220,9 @@ Score: {self.score}"""
 				self.game_over_label.text = ""
 				self.x, self.y = 50, 700
 				self.pill_x = 700
+				self.score = 0
 				self.drop = 7
 				self.jump_count = 10
-                                self.score = 0
 				self.difficulty.text ="Easy"
 				self.difficulty.color = self.easy_bg
 				self.speed = 3
