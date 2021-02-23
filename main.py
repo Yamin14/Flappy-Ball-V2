@@ -16,6 +16,9 @@ class Game(Widget):
 	def play(self):
 		self.x, self.y = 50, 700
 		self.score = 0
+		file = open("high_score.txt", "r")
+		self.high_score = int(file.read())
+		file.close()
 		self.inc = 0.005
 		
 		self.speed = 3
@@ -86,6 +89,9 @@ class Game(Widget):
 		self.score_label = Label(text=(f"Score: {self.score}"), pos=(40, 1300), font_size=40, color=self.label_color)
 		self.add_widget(self.score_label)
 		
+		self.high_score_label = Label(text=(f"High Score: {self.high_score}"), pos=(500, 1300), font_size=40, color=self.label_color)
+		self.add_widget(self.high_score_label)
+		
 		#ground
 		with self.canvas:
 			Color(rgb=(0.4, 0.4, 0))
@@ -134,7 +140,10 @@ class Game(Widget):
 				self.pill_x = 700
 				self.score += 1
 				self.speed += self.inc
-			
+				if self.score > self.high_score:
+					self.high_score = self.score
+				
+				
 			#new pillars
 				self.pill_up_height = random.randint(200, 900)
 				self.pill_down_height = random.randint(200, 900)
@@ -154,6 +163,7 @@ class Game(Widget):
 		#change ball position and score label
 		self.ball.pos = (self.x, self.y)
 		self.score_label.text = f"Score: {self.score}"
+		self.high_score_label.text = f"High Score: {self.high_score}"
 		
 		#check collision
 		if self.y <= 70:
@@ -171,8 +181,13 @@ class Game(Widget):
 			self.drop = 0
 			self.jump_count = -11
 			
+			file = open("high_score.txt", "w")
+			file.write(str(self.high_score))
+			file.close()
+			
 			self.game_over_label.text = f"""Game Over
-Score: {self.score}"""
+Score: {self.score}
+High Score: {self.high_score}"""
 
 	def on_touch_down(self, touch):
 		if touch.pos[0] >= 20 and touch.pos[0] <= 160 and touch.pos[1] >= 1230 and touch.pos[1] <= 1300:
