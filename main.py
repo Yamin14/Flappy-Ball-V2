@@ -136,8 +136,7 @@ class Game(Widget):
 						self.jumping = False
 
 			#increment score
-			if self.pill_x + self.pill_width < self.x:
-				
+			if self.pill_x + self.pill_width >= self.x-(self.speed/2) and self.pill_x + self.pill_width <= self.x+(self.speed/2):	
 				self.score += 1
 				self.speed += self.inc
 				if self.score > self.high_score:
