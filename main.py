@@ -7,7 +7,7 @@ from kivy.uix.label import Label
 import random
 import pygame
 pygame.init()
-
+		
 class Game(Widget):
 	def __init__(self, **kwargs):
 		super(Game, self).__init__(**kwargs)
@@ -137,7 +137,7 @@ class Game(Widget):
 
 			#increment score
 			if self.pill_x + self.pill_width < self.x:
-				self.pill_x = 700
+				
 				self.score += 1
 				self.speed += self.inc
 				if self.score > self.high_score:
@@ -145,6 +145,8 @@ class Game(Widget):
 				
 				
 			#new pillars
+			if self.pill_x+self.pill_width < 0: 
+				self.pill_x = 700
 				self.pill_up_height = random.randint(200, 900)
 				self.pill_down_height = random.randint(200, 900)
 				self.pill_up_y = 1400 - self.pill_up_height
